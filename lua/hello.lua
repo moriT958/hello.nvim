@@ -17,7 +17,10 @@ function M.hello()
     style = "minimal",
     border = "rounded",
   }
-  vim.api.nvim_open_win(buf, true, ops)
+  local win_id = vim.api.nvim_open_win(buf, true, ops)
+  vim.defer_fn(function()
+    vim.api.nvim_win_close(win_id, true)
+  end, 1000)
 end
 
 return M
